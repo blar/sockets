@@ -1,10 +1,16 @@
 <?php
+
 /**
  * @author Andreas Treichel <gmblar+github@gmail.com>
  */
 
 namespace Blar\Sockets;
 
+/**
+ * Class UnixSocket
+ *
+ * @package Blar\Sockets
+ */
 class UnixSocket implements Socket {
 
     /**
@@ -19,6 +25,13 @@ class UnixSocket implements Socket {
      */
     public function __construct($fileName) {
         $this->setFileName($fileName);
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString() {
+        return $this->getFileName();
     }
 
     /**

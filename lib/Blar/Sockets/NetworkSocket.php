@@ -6,6 +6,11 @@
 
 namespace Blar\Sockets;
 
+/**
+ * Class NetworkSocket
+ *
+ * @package Blar\Sockets
+ */
 class NetworkSocket implements Socket {
 
     /**
@@ -17,6 +22,24 @@ class NetworkSocket implements Socket {
      * @var int
      */
     private $port;
+
+    /**
+     * NetworkSocket constructor.
+     *
+     * @param string $host
+     * @param int $port
+     */
+    public function __construct($host = NULL, $port = NULL) {
+        $this->setHost($host);
+        $this->setPort($port);
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString() {
+        return sprintf('%s:%u', $this->getHost(), $this->getPort());
+    }
 
     /**
      * @return string
