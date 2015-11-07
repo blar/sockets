@@ -17,3 +17,8 @@ matrix:
   allow_failures:
     - php: 7.0
     - php: hhvm
+
+notifications:
+  irc:
+    channels:
+      - "irc.quakenet.org#blar-dev"
