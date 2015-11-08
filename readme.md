@@ -1,4 +1,4 @@
-[![License](https://poser.pugx.org/blar/sockets/sockets)](https://packagist.org/packages/blar/sockets)
+[![License](https://poser.pugx.org/blar/sockets/license)](https://packagist.org/packages/blar/sockets)
 [![Latest Stable Version](https://poser.pugx.org/blar/sockets/v/stable)](https://packagist.org/packages/blar/sockets)
 [![Build Status](https://travis-ci.org/blar/sockets.svg?branch=master)](https://travis-ci.org/blar/sockets)
 [![Coverage Status](https://coveralls.io/repos/blar/sockets/badge.svg?branch=master)](https://coveralls.io/r/blar/sockets?branch=master)
