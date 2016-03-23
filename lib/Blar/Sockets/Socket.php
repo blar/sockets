@@ -13,4 +13,9 @@ namespace Blar\Sockets;
  */
 interface Socket {
 
+    /**
+     * @return string
+     */
+    public function __toString(): string;
+
 }

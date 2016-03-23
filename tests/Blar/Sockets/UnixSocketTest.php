@@ -21,7 +21,7 @@ class UnixSocketTest extends TestCase {
     }
 
     public function testSetter() {
-        $socket = new UnixSocket('/var/run/test.sock');
+        $socket = new UnixSocket();
         $socket->setFileName('/var/run/test2.sock');
         $this->assertSame('/var/run/test2.sock', (string) $socket);
     }

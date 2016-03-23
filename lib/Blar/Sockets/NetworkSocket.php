@@ -29,48 +29,66 @@ class NetworkSocket implements Socket {
      * @param string $host
      * @param int $port
      */
-    public function __construct($host = NULL, $port = NULL) {
-        $this->setHost($host);
-        $this->setPort($port);
+    public function __construct(string $host = NULL, int $port = NULL) {
+        if(!is_null($host)) {
+            $this->setHost($host);
+        }
+        if(!is_null($port)) {
+            $this->setPort($port);
+        }
     }
 
     /**
      * @return string
      */
-    public function __toString() {
+    public function __toString(): string {
         return sprintf('%s:%u', $this->getHost(), $this->getPort());
     }
 
     /**
      * @return string
      */
-    public function getHost() {
+    public function getHost(): string {
         return $this->host;
     }
 
     /**
      * @param string $host
-     * @return $this
      */
-    public function setHost($host) {
+    public function setHost(string $host) {
         $this->host = $host;
-        return $this;
     }
 
     /**
      * @return int
      */
-    public function getPort() {
+    public function getPort(): int {
         return $this->port;
     }
 
     /**
      * @param int $port
-     * @return $this
      */
-    public function setPort($port) {
+    public function setPort(int $port) {
         $this->port = $port;
-        return $this;
+    }
+
+    /**
+     * @param Socket $socket
+     *
+     * @return bool
+     */
+    public function equals(Socket $socket): bool {
+        if(!($socket instanceof $this)) {
+            return FALSE;
+        }
+        if($this->getHost() != $socket->getHost()) {
+            return FALSE;
+        }
+        if($this->getPort() != $socket->getPort()) {
+            return FALSE;
+        }
+        return TRUE;
     }
 
 }
