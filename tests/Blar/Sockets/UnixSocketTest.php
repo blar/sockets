@@ -26,4 +26,15 @@ class UnixSocketTest extends TestCase {
         $this->assertSame('/var/run/test2.sock', (string) $socket);
     }
 
+    public function testEquals() {
+        $socket1 = new UnixSocket();
+        $socket1->setFileName('/var/run/test.sock');
+
+        $socket2 = new UnixSocket();
+        $socket2->setFileName('/var/run/test.sock');
+
+        $this->assertTrue($socket1->equals($socket2));
+        $this->assertTrue($socket2->equals($socket1));
+    }
+
 }

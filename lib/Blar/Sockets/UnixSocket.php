@@ -59,7 +59,7 @@ class UnixSocket implements Socket {
         if(!($socket instanceof $this)) {
             return FALSE;
         }
-        if($this->getFileName() != $socket->getFileName) {
+        if($this->getFileName() != $socket->getFileName()) {
             return FALSE;
         }
         return TRUE;
