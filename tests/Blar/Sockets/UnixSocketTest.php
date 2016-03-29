@@ -13,6 +13,7 @@ class UnixSocketTest extends TestCase {
     public function testConstructor() {
         $socket = new UnixSocket('/var/run/test.sock');
         $this->assertSame('/var/run/test.sock', $socket->getFileName());
+        $this->assertEquals('/var/run/test.sock', $socket);
     }
 
     public function testString() {
@@ -35,6 +36,16 @@ class UnixSocketTest extends TestCase {
 
         $this->assertTrue($socket1->equals($socket2));
         $this->assertTrue($socket2->equals($socket1));
+    }
+
+    public function testNotEquals() {
+        $socket1 = new UnixSocket('/var/run/test.sock');
+
+        $socket2 = new NetworkSocket('127.0.0.1');
+        $socket2->setPort(8080);
+
+        $this->assertFalse($socket1->equals($socket2));
+        $this->assertFalse($socket2->equals($socket1));
     }
 
 }

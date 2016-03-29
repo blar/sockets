@@ -14,6 +14,7 @@ class NetworkSocketTest extends TestCase {
         $socket = new NetworkSocket('127.0.0.1', 80);
         $this->assertSame('127.0.0.1', $socket->getHost());
         $this->assertSame(80, $socket->getPort());
+        $this->assertSame('127.0.0.1:80', (string) $socket);
     }
 
     public function testConstructorAndSetters() {
@@ -23,6 +24,7 @@ class NetworkSocketTest extends TestCase {
 
         $this->assertSame('127.0.0.2', $socket->getHost());
         $this->assertSame(8080, $socket->getPort());
+        $this->assertSame('127.0.0.2:8080', (string) $socket);
     }
 
     public function testSetters() {
@@ -32,6 +34,7 @@ class NetworkSocketTest extends TestCase {
 
         $this->assertSame('127.0.0.2', $socket->getHost());
         $this->assertSame(8080, $socket->getPort());
+        $this->assertSame('127.0.0.2:8080', (string) $socket);
     }
 
     public function testSettersWithHostname() {
@@ -40,6 +43,50 @@ class NetworkSocketTest extends TestCase {
 
         $this->assertSame('127.0.0.3', $socket->getHost());
         $this->assertSame(8080, $socket->getPort());
+        $this->assertSame('127.0.0.3:8080', (string) $socket);
+    }
+
+    public function testEquals() {
+        $socket1 = new NetworkSocket('127.0.0.1');
+        $socket1->setPort(8080);
+
+        $socket2 = new NetworkSocket('127.0.0.1');
+        $socket2->setPort(8080);
+
+        $this->assertTrue($socket1->equals($socket2));
+        $this->assertTrue($socket2->equals($socket1));
+    }
+
+    public function testNotEquals() {
+        $socket1 = new NetworkSocket('127.0.0.1');
+        $socket1->setPort(8080);
+
+        $socket2 = new NetworkSocket('127.0.0.2');
+        $socket2->setPort(8080);
+
+        $this->assertFalse($socket1->equals($socket2));
+        $this->assertFalse($socket2->equals($socket1));
+    }
+
+    public function testNotEqualsPort() {
+        $socket1 = new NetworkSocket('127.0.0.1');
+        $socket1->setPort(8080);
+
+        $socket2 = new NetworkSocket('127.0.0.1');
+        $socket2->setPort(8081);
+
+        $this->assertFalse($socket1->equals($socket2));
+        $this->assertFalse($socket2->equals($socket1));
+    }
+
+    public function testNotEqualsSocket() {
+        $socket1 = new NetworkSocket('127.0.0.1');
+        $socket1->setPort(8080);
+
+        $socket2 = new UnixSocket('/var/run/test.sock');
+
+        $this->assertFalse($socket1->equals($socket2));
+        $this->assertFalse($socket2->equals($socket1));
     }
 
 }
