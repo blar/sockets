@@ -1,18 +1,21 @@
+sudo: false
+
 language: php
 
 php:
-  - 7.0
+    - 7.0
+    - 7.1
 
 cache:
-  - apt
+    - apt
 
 before_script:
-  - composer install
+    - composer install
 
 after_success:
-  - php vendor/bin/coveralls -v
+    - php vendor/bin/coveralls -v
 
 notifications:
-  irc:
-    channels:
-      - "irc.quakenet.org#blar-dev"
+    irc:
+        channels:
+            - "irc.quakenet.org#blar-dev"
