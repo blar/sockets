@@ -55,7 +55,7 @@ class UnixSocket implements Socket {
      *
      * @return bool
      */
-    public function equals(Socket $socket): bool {
+    public function compareTo(Socket $socket): bool {
         if(!($socket instanceof $this)) {
             return FALSE;
         }
