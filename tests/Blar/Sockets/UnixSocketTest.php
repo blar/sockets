@@ -53,6 +53,14 @@ class UnixSocketTest extends TestCase {
         $this->assertFalse($socket2->compareTo($socket1));
     }
 
+    public function testNotEquals2() {
+        $socket1 = new UnixSocket('/var/run/test1.sock');
+        $socket2 = new UnixSocket('/var/run/test2.sock');
+
+        $this->assertFalse($socket1->compareTo($socket2));
+        $this->assertFalse($socket2->compareTo($socket1));
+    }
+
     public function testToString() {
         $socket = new UnixSocket('/var/run/test.sock');
         $this->assertSame('/var/run/test.sock', (string) $socket);
