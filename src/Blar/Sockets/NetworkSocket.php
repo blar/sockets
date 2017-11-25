@@ -6,12 +6,14 @@
 
 namespace Blar\Sockets;
 
+use Blar\Comparable\Comparable;
+
 /**
  * Class NetworkSocket
  *
  * @package Blar\Sockets
  */
-class NetworkSocket implements Socket {
+class NetworkSocket implements Socket, Comparable {
 
     /**
      * @var string
@@ -21,7 +23,7 @@ class NetworkSocket implements Socket {
     /**
      * @var int
      */
-    private $port;
+    private $port = 0;
 
     /**
      * NetworkSocket constructor.
@@ -29,13 +31,9 @@ class NetworkSocket implements Socket {
      * @param string $host
      * @param int $port
      */
-    public function __construct(string $host = NULL, int $port = NULL) {
-        if(!is_null($host)) {
-            $this->setHost($host);
-        }
-        if(!is_null($port)) {
-            $this->setPort($port);
-        }
+    public function __construct(string $host, int $port = 0) {
+        $this->setHost($host);
+        $this->setPort($port);
     }
 
     /**
@@ -55,7 +53,7 @@ class NetworkSocket implements Socket {
     /**
      * @param string $host
      */
-    public function setHost(string $host) {
+    protected function setHost(string $host): void {
         $this->host = $host;
     }
 
@@ -69,23 +67,23 @@ class NetworkSocket implements Socket {
     /**
      * @param int $port
      */
-    public function setPort(int $port) {
+    protected function setPort(int $port): void {
         $this->port = $port;
     }
 
     /**
-     * @param Socket $socket
+     * @param mixed $other
      *
      * @return bool
      */
-    public function compareTo(Socket $socket): bool {
-        if(!($socket instanceof $this)) {
+    public function compareTo($other): bool {
+        if(!($other instanceof $this)) {
             return FALSE;
         }
-        if($this->getHost() != $socket->getHost()) {
+        if($this->getHost() !== $other->getHost()) {
             return FALSE;
         }
-        if($this->getPort() != $socket->getPort()) {
+        if($this->getPort() !== $other->getPort()) {
             return FALSE;
         }
         return TRUE;

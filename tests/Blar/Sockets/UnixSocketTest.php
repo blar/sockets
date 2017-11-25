@@ -6,7 +6,7 @@
 
 namespace Blar\Sockets;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class UnixSocketTest
@@ -27,17 +27,13 @@ class UnixSocketTest extends TestCase {
     }
 
     public function testSetter() {
-        $socket = new UnixSocket();
-        $socket->setFileName('/var/run/test2.sock');
+        $socket = new UnixSocket('/var/run/test2.sock');
         $this->assertSame('/var/run/test2.sock', (string) $socket);
     }
 
     public function testEquals() {
-        $socket1 = new UnixSocket();
-        $socket1->setFileName('/var/run/test.sock');
-
-        $socket2 = new UnixSocket();
-        $socket2->setFileName('/var/run/test.sock');
+        $socket1 = new UnixSocket('/var/run/test.sock');
+        $socket2 = new UnixSocket('/var/run/test.sock');
 
         $this->assertTrue($socket1->compareTo($socket2));
         $this->assertTrue($socket2->compareTo($socket1));
@@ -45,9 +41,7 @@ class UnixSocketTest extends TestCase {
 
     public function testNotEquals() {
         $socket1 = new UnixSocket('/var/run/test.sock');
-
-        $socket2 = new NetworkSocket('127.0.0.1');
-        $socket2->setPort(8080);
+        $socket2 = new NetworkSocket('127.0.0.1', 8080);
 
         $this->assertFalse($socket1->compareTo($socket2));
         $this->assertFalse($socket2->compareTo($socket1));

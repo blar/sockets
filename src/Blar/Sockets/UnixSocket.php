@@ -6,12 +6,14 @@
 
 namespace Blar\Sockets;
 
+use Blar\Comparable\Comparable;
+
 /**
  * Class UnixSocket
  *
  * @package Blar\Sockets
  */
-class UnixSocket implements Socket {
+class UnixSocket implements Socket, Comparable {
 
     /**
      * @var string
@@ -23,10 +25,8 @@ class UnixSocket implements Socket {
      *
      * @param string $fileName
      */
-    public function __construct(string $fileName = NULL) {
-        if(!is_null($fileName)) {
-            $this->setFileName($fileName);
-        }
+    public function __construct(string $fileName) {
+        $this->setFileName($fileName);
     }
 
     /**
@@ -46,20 +46,20 @@ class UnixSocket implements Socket {
     /**
      * @param string $fileName
      */
-    public function setFileName(string $fileName) {
+    protected function setFileName(string $fileName): void {
         $this->fileName = $fileName;
     }
 
     /**
-     * @param Socket $socket
+     * @param mixed $other
      *
      * @return bool
      */
-    public function compareTo(Socket $socket): bool {
-        if(!($socket instanceof $this)) {
+    public function compareTo($other): bool {
+        if(!($other instanceof $this)) {
             return FALSE;
         }
-        if($this->getFileName() != $socket->getFileName()) {
+        if($this->getFileName() !== $other->getFileName()) {
             return FALSE;
         }
         return TRUE;

@@ -2,7 +2,10 @@
     "name": "blar/sockets",
     "description": "Sockets for PHP",
     "type": "library",
-    "keywords": ["php", "sockets"],
+    "keywords": [
+        "php",
+        "sockets"
+    ],
     "homepage": "https://github.com/blar/sockets/",
     "license": "LGPL-3.0+",
     "authors": [
@@ -12,7 +15,8 @@
         }
     ],
     "require": {
-        "php": "^7.0"
+        "php": "^7.1",
+        "blar/comparable": "dev-master"
     },
     "require-dev": {
         "satooshi/php-coveralls": "^1.0"
@@ -24,7 +28,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Blar\\Sockets\\": "lib/Blar/Sockets/"
+            "Blar\\Sockets\\": "src/Blar/Sockets/"
         }
     }
 }

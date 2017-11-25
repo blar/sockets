@@ -1,5 +1,5 @@
 source:
-- lib
+- src
 
 destination: build/docs
 
